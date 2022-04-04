@@ -1,4 +1,4 @@
-package org.jetbrains.plugins.template
+package com.github.lx200916.fishboneplugin
 
 import com.intellij.DynamicBundle
 import org.jetbrains.annotations.NonNls
