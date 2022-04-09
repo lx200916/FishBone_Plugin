@@ -6,13 +6,43 @@
 
     <depends>com.intellij.modules.platform</depends>
 
+
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.lx200916.fishboneplugin.services.MyApplicationService"/>
+        <applicationService serviceImplementation="com.github.lx200916.fishboneplugin.settings.pluginSettings"/>
+        <applicationConfigurable instance="com.github.lx200916.fishboneplugin.ui.settings" displayName="Upload to FishBone" parentId="tools"/>
         <projectService serviceImplementation="com.github.lx200916.fishboneplugin.services.MyProjectService"/>
+        <notificationGroup id="com.github.lx200916.fishboneplugin.notificationGroup"
+                           displayType="BALLOON"/>
     </extensions>
 
     <applicationListeners>
         <listener class="com.github.lx200916.fishboneplugin.listeners.MyProjectManagerListener"
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
+    <actions>
+        <action class="com.github.lx200916.fishboneplugin.actions.newPublicPaste"
+                id="com.github.lx200916.fishboneplugin.newPublicPaste"
+                text="New Public Paste"
+                description="Create a new public paste"
+                icon="/pluginIconsmall.svg"
+               />
+        <action class="com.github.lx200916.fishboneplugin.actions.newPrivatePaste"
+                id="com.github.lx200916.fishboneplugin.newPrivatePaste"
+                text="New Private Paste"
+                description="Create a new private paste"
+                icon="/pluginIconsmall.svg"
+        />
+        <group id="FishBone.MainMenu"  popup="true" text="Upload to FishBone" icon="/pluginIconsmall.svg">
+            <reference ref="com.github.lx200916.fishboneplugin.newPrivatePaste"/>
+            <reference ref="com.github.lx200916.fishboneplugin.newPublicPaste"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="after" relative-to-action="Github.Create.Gist"/>
+            <add-to-group group-id="ConsoleEditorPopupMenu"/>
+<!--            <add-to-group group-id="ConsoleView.PopupMenu"/>-->
+
+            <add-to-group group-id="EditorTabPopupMenu"/>
+
+        </group>
+
+    </actions>
 </idea-plugin>
